@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:country/Country/country_model.dart';
 import 'package:country/Country/country_page2.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:country/Country/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:sizer/sizer.dart';
 
 class Country extends StatefulWidget {
   const Country({Key? key}) : super(key: key);
@@ -28,7 +25,7 @@ class _CountryState extends State<Country> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: kWidth(20.0).w,vertical: kHeight(20.0).h,),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +33,7 @@ class _CountryState extends State<Country> {
                 RichText(
                   text: TextSpan(
                     children: [
-                      TextSpan(
+                      const TextSpan(
                         text: "Countries\n\n",
                         style: TextStyle(
                           color: Colors.black,
@@ -55,36 +52,38 @@ class _CountryState extends State<Country> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: kHeight(20.0).h),
                 TextFormField(
                   controller: _countryController,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.search,
+                    prefixIcon: const Icon(
+                      Icons.search,
+                    ),
+                    hintText: "Type to search...",
+                    hintStyle: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 18.0,
+                    ),
+                    border: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black38,
                       ),
-                      hintText: "Type to search...",
-                      hintStyle: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: 18.0,
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        enteredCountry = _countryController.text;
+                        setState(() {});
+                      },
+                      icon:  Icon(
+                        Icons.send,
+                        size: kHeight(20.0).h,
+                        color: Colors.black,
                       ),
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black38,
-                        ),
-                      ),
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            enteredCountry = _countryController.text;
-                            setState(() {});
-                          },
-                          icon: Icon(
-                            Icons.send,
-                            size: 20.0,
-                            color: Colors.black,
-                          ))),
+                    ),
+                  ),
                 ),
-                SizedBox(height: 30.0),
-                Text(
+                SizedBox(height: kHeight(30.0).h),
+                const Text(
                   "Popular Countries",
                   style: TextStyle(
                     fontSize: 20.0,
@@ -92,26 +91,27 @@ class _CountryState extends State<Country> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: kHeight(30.0).h),
                 FutureBuilder(
                   future: _getCountrysfromApi(),
                   builder: (context, AsyncSnapshot<List<CountryModel>> snap) {
                     var data = snap.data;
                     return snap.hasData
-                        ? Container(
-                            height: 250.0,
+                        ? SizedBox(
+                            height: kHeight(250.0).h,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 int randomIndex =
                                     Random().nextInt(data!.length);
                                 return Container(
-                                  width: 160.0,
+                                  width: kWidth(160.0).w,
                                   margin: EdgeInsets.symmetric(
-                                    horizontal: 5.0,
-                                  ),
+                                      horizontal: kWidth(5.0).w),
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 15.0, vertical: 20.0),
+                                    horizontal: kWidth(15.0).w,
+                                    vertical: kHeight(20.0).h,
+                                  ),
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: NetworkImage(
@@ -131,7 +131,7 @@ class _CountryState extends State<Country> {
                                             .name!
                                             .common
                                             .toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16.0,
@@ -139,27 +139,26 @@ class _CountryState extends State<Country> {
                                       ),
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.star,
                                             color: Colors.amber,
                                             size: 16.0,
                                           ),
-                                          SizedBox(width: 5.0),
+                                          SizedBox(width: kWidth(5.0).w),
                                           Text(
-                                            "4" +
-                                                "." +
+                                            "4." +
                                                 Random().nextInt(10).toString(),
                                             style: TextStyle(
                                               color: Colors.grey[350],
                                             ),
                                           ),
-                                          SizedBox(width: 5.0),
+                                          SizedBox(width: kWidth(5.0).w),
                                           Icon(
                                             Icons.circle_rounded,
                                             size: 5.0,
                                             color: Colors.grey[350],
                                           ),
-                                          SizedBox(width: 5.0),
+                                          SizedBox(width: kWidth(5.0).w),
                                           Text(
                                             "${1 + Random().nextInt(4)}" +
                                                 "." +
@@ -178,12 +177,12 @@ class _CountryState extends State<Country> {
                             ),
                           )
                         : Container(
-                            height: 250.0,
+                            height: kHeight(250.0).h,
                           );
                   },
                 ),
-                SizedBox(height: 20.0),
-                Text(
+                SizedBox(height: kHeight(20.0).h),
+                const Text(
                   "Top Rated",
                   style: TextStyle(
                     fontSize: 20.0,
@@ -191,7 +190,7 @@ class _CountryState extends State<Country> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: kHeight(20.0).h),
                 FutureBuilder(
                   future: _getSelectedCountrysfromApi(),
                   builder: (context, AsyncSnapshot<List<CountryModel>> snap) {
@@ -205,33 +204,32 @@ class _CountryState extends State<Country> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Country_Page2(
-                                    network_img,
-                                    data[0].name!.common.toString(),
-                                    data[0].capital![0].toString(),
-                                    data[0].name!.official.toString(),
-                                    data[0].area.toString(),
-                                    data[0].population.toString(),
-                                    data[0].flag.toString(),
-                                    data[0].maps!.openStreetMaps.toString()
-                                  ),
+                                      network_img,
+                                      data[0].name!.common.toString(),
+                                      data[0].capital![0].toString(),
+                                      data[0].name!.official.toString(),
+                                      data[0].area.toString(),
+                                      data[0].population.toString(),
+                                      data[0].flag.toString(),
+                                      data[0].maps!.openStreetMaps.toString()),
                                 ),
                               );
                             },
                             child: Container(
-                              height: 200.0,
-                              width: 400.0,
+                              height: kHeight(200.0).h,
+                              width: kWidth(400.0).w,
                               margin: EdgeInsets.symmetric(
-                                horizontal: 5.0,
-                              ),
+                                  horizontal: kWidth(5.0).w),
                               padding: EdgeInsets.symmetric(
-                                horizontal: 25.0,
-                                vertical: 25.0,
+                                horizontal: kWidth(25.0).w,
+                                vertical: kHeight(25.0).h,
                               ),
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  colorFilter: new ColorFilter.mode(
-                                      Colors.black45.withOpacity(0.8),
-                                      BlendMode.dstATop),
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.black45.withOpacity(0.8),
+                                    BlendMode.dstATop,
+                                  ),
                                   image: NetworkImage(
                                       "https://source.unsplash.com/1600x900/?${data![0].name!.common.toString()},${data[0].capital![0].toString()}"),
                                   fit: BoxFit.cover,
@@ -253,7 +251,7 @@ class _CountryState extends State<Country> {
                                       children: [
                                         Text(
                                           "Official name:\n${data[0].name!.official}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16.0,
@@ -261,7 +259,7 @@ class _CountryState extends State<Country> {
                                         ),
                                         Text(
                                           "${data[0].name!.common}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 28.0,
@@ -284,7 +282,7 @@ class _CountryState extends State<Country> {
                                         ),
                                         Text(
                                           "Capital:\n${data[0].capital![0]}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16.0,
@@ -309,7 +307,7 @@ class _CountryState extends State<Country> {
         selectedItemColor: Colors.greenAccent,
         unselectedItemColor: Colors.grey,
         currentIndex: 3,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "",

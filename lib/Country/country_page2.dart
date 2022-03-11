@@ -1,9 +1,9 @@
 import 'package:country/Country/country_page3.dart';
+import 'package:country/Country/sizer.dart';
 import 'package:country/Country/weather_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:sizer/sizer.dart';
 import 'dart:convert';
 
 import 'package:weather_icons/weather_icons.dart';
@@ -42,11 +42,11 @@ class _Country_Page2State extends State<Country_Page2> {
               Expanded(
                 flex: 3,
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20.0,
-                    top: 10.0,
-                    bottom: 400.0,
-                    right: 300.0,
+                  padding: EdgeInsets.only(
+                    left: kWidth(20.0).w,
+                    top: kHeight(10.0).h,
+                    bottom: kHeight(400.0).h,
+                    right: kWidth(300.0).w,
                   ),
                   child: CircleAvatar(
                     backgroundColor: Colors.black54,
@@ -70,10 +70,12 @@ class _Country_Page2State extends State<Country_Page2> {
                       future: _getWeatherApi(),
                       builder: (context, AsyncSnapshot<Weather> snap) {
                         var data = snap.data;
-
                         return snap.hasData
                             ? Padding(
-                                padding: const EdgeInsets.all(30.0),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: kWidth(30.0).w,
+                                  vertical: kHeight(30.0).h,
+                                ),
                                 child: Row(
                                   children: [
                                     Icon(
@@ -83,20 +85,21 @@ class _Country_Page2State extends State<Country_Page2> {
                                       size: 30.0,
                                       color: Colors.white,
                                     ),
-                                    const SizedBox(width: 20.0),
+                                    SizedBox(width: kWidth(20.0).w),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          (data.main!.temp! - 273.15).toStringAsFixed(2),
+                                          (data.main!.temp! - 273.15)
+                                              .toStringAsFixed(2),
                                           style: const TextStyle(
                                             fontSize: 25.0,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
                                           ),
                                         ),
-                                        const SizedBox(height: 10.0),
+                                        SizedBox(height: kHeight(10.0).h),
                                         Text(
                                           "Wind: " +
                                               data.wind!.speed.toString() +
@@ -114,7 +117,7 @@ class _Country_Page2State extends State<Country_Page2> {
                                   ],
                                 ),
                               )
-                            : const SizedBox(height: 150.0);
+                            : SizedBox(height: kHeight(150.0).h);
                       },
                     ),
                     Text(
@@ -125,7 +128,7 @@ class _Country_Page2State extends State<Country_Page2> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 20.0),
+                    SizedBox(height: kHeight(20.0).h),
                     Text(
                       widget.poytaxt.toString() + ", " + widget.davlat,
                       style: TextStyle(
@@ -134,13 +137,13 @@ class _Country_Page2State extends State<Country_Page2> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 30.0),
+                    SizedBox(height: kHeight(30.0).h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            fixedSize: const Size(180.0, 50.0),
+                            fixedSize:  Size(kWidth(180.0).w, kHeight(50.0).h),
                             side: const BorderSide(
                               color: Colors.white,
                               width: 2.0,
@@ -175,7 +178,7 @@ class _Country_Page2State extends State<Country_Page2> {
                         ),
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            fixedSize: const Size(180.0, 50.0),
+                            fixedSize:  Size(kWidth(180.0).w, kHeight(50.0).h),
                             side: BorderSide.none,
                             backgroundColor: Colors.greenAccent,
                           ),

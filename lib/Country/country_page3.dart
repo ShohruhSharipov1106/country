@@ -1,6 +1,6 @@
-import 'package:country/Country/country_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:country/Country/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Country_Page3 extends StatefulWidget {
@@ -36,9 +36,9 @@ class _Country_Page3State extends State<Country_Page3> {
           SliverAppBar(
             elevation: 0,
             leading: Padding(
-              padding: const EdgeInsets.only(
-                left: 15.0,
-                top: 15.0,
+              padding: EdgeInsets.only(
+                left: kWidth(15.0).w,
+                top: kHeight(20.0).h,
               ),
               child: CircleAvatar(
                 radius: 25.0,
@@ -54,8 +54,8 @@ class _Country_Page3State extends State<Country_Page3> {
                 ),
               ),
             ),
-            collapsedHeight: 200.0,
-            expandedHeight: 200.0,
+            collapsedHeight: kHeight(200.0).h,
+            expandedHeight: kHeight(200.0).h,
             pinned: true,
             flexibleSpace: PageView.builder(
               itemBuilder: (context, index) {
@@ -74,13 +74,13 @@ class _Country_Page3State extends State<Country_Page3> {
           SliverFillRemaining(
             hasScrollBody: false,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 30.0,
+              padding: EdgeInsets.symmetric(
+                horizontal: kWidth(30.0).w,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30.0),
+                  SizedBox(height: kHeight(30.0).h),
                   Text(
                     widget.page3rasmiy_nomi,
                     style: const TextStyle(
@@ -89,7 +89,7 @@ class _Country_Page3State extends State<Country_Page3> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 20.0),
+                  SizedBox(height: kHeight(20.0).h),
                   Text(
                     widget.page3poytaxt.toString() + ", " + widget.page3davlat,
                     style: TextStyle(
@@ -98,7 +98,7 @@ class _Country_Page3State extends State<Country_Page3> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 20.0),
+                  SizedBox(height: kHeight(20.0).h),
                   Row(
                     children: [
                       CircleAvatar(
@@ -113,7 +113,7 @@ class _Country_Page3State extends State<Country_Page3> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10.0),
+                      SizedBox(width: kWidth(10.0).w),
                       CircleAvatar(
                         radius: 22.0,
                         backgroundColor: Colors.grey[200],
@@ -128,36 +128,36 @@ class _Country_Page3State extends State<Country_Page3> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10.0),
+                      SizedBox(width: kWidth(10.0).w),
                       CircleAvatar(
                         radius: 22.0,
                         backgroundColor: Colors.grey[200],
                         child: IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.share,
                             size: 20.0,
                             color: Colors.grey,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10.0),
+                      SizedBox(width: kWidth(10.0).w),
                       CircleAvatar(
-                        radius: 22.0,
+                        radius: kHeight(22.0).h,
                         backgroundColor: Colors.grey[200],
                         child: IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon:  Icon(
                             Icons.calendar_today_rounded,
-                            size: 20.0,
+                            size: kHeight(20.0).h,
                             color: Colors.grey,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 30.0),
+                      SizedBox(width: kWidth(30.0).w),
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          fixedSize: const Size(110.0, 50.0),
+                          fixedSize: Size(kWidth(110.0).w, kHeight(50.0).h,),
                           side: const BorderSide(
                             color: Colors.greenAccent,
                             width: 2.0,
@@ -176,12 +176,12 @@ class _Country_Page3State extends State<Country_Page3> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10.0),
+                  SizedBox(height: kHeight(10.0).h),
                   Divider(
                     color: Colors.grey[200],
                     thickness: 2.0,
                   ),
-                  const SizedBox(height: 10.0),
+                  SizedBox(height: kHeight(10.0).h),
                   const Text(
                     "Information",
                     style: TextStyle(
@@ -190,7 +190,7 @@ class _Country_Page3State extends State<Country_Page3> {
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 20.0),
+                  SizedBox(height: kHeight(20.0).h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -204,7 +204,7 @@ class _Country_Page3State extends State<Country_Page3> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          const SizedBox(height: 10.0),
+                          SizedBox(height: kHeight(10.0).h),
                           const Text(
                             "Area(sq. km.)",
                             style: TextStyle(
@@ -225,7 +225,7 @@ class _Country_Page3State extends State<Country_Page3> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          const SizedBox(height: 10.0),
+                          SizedBox(height: kHeight(10.0).h),
                           const Text(
                             "Population(people)",
                             style: TextStyle(
@@ -246,7 +246,7 @@ class _Country_Page3State extends State<Country_Page3> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          const SizedBox(height: 10.0),
+                          SizedBox(height: kHeight(10.0).h),
                           const Text(
                             "Flag",
                             style: TextStyle(
@@ -259,7 +259,7 @@ class _Country_Page3State extends State<Country_Page3> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20.0),
+                  SizedBox(height: kHeight(20.0).h),
                   const Text(
                     " It is often referred to as the land of an individual's birth, residence or citizenship.A country may be an independent sovereign state or part of a larger state, as a non-sovereign or formerly sovereign political division...",
                     style: TextStyle(
@@ -268,7 +268,7 @@ class _Country_Page3State extends State<Country_Page3> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 10.0),
+                  SizedBox(height: kHeight(10.0).h),
                   ListTile(
                     tileColor: Colors.grey[100],
                     title: const Text("Show scorecard"),
@@ -287,7 +287,7 @@ class _Country_Page3State extends State<Country_Page3> {
                     children: [
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          fixedSize: Size(150.0, 50.0),
+                          fixedSize: Size(kWidth(150.0).w, kHeight(50.0).h),
                           side: const BorderSide(
                             color: Colors.greenAccent,
                             width: 2.0,
@@ -306,7 +306,7 @@ class _Country_Page3State extends State<Country_Page3> {
                       ),
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          fixedSize: const Size(150.0, 50.0),
+                          fixedSize: Size(kWidth(150.0).w, kHeight(50.0).h),
                           side: BorderSide.none,
                           backgroundColor: Colors.greenAccent,
                         ),
